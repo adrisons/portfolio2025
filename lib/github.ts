@@ -10,6 +10,7 @@ export interface Repository {
   forks_count: number
   language: string
   topics: string[]
+  fork: boolean
 }
 
 export interface GitHubStats {
