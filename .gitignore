@@ -30,7 +30,6 @@ build/
 Thumbs.db
 
 # pnpm
-pnpm-lock.yaml
 .pnpm-debug.log*
 .pnpm-store/
 
