@@ -6,9 +6,21 @@ import { Button } from "@/components/ui/button"
 import { FaStar, FaCodeBranch, FaCode } from "react-icons/fa"
 
 export async function GitHubSection({ username }: { username: string }) {
-  const stats = await fetchGitHubStats(username)
-  const projects = await fetchGitHubRepos(username)
+  const token = process.env.GITHUB_TOKEN; // Access the token directly
+  if (!token) {
+    console.error("GITHUB_TOKEN is missing");
+    return (
+      <section id="github" className="py-16">
+        <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+          GitHub Activity
+        </h2>
+        <p className="text-center py-12 text-gray-400">Failed to load GitHub stats</p>
+      </section>
+    );
+  }
 
+  const stats = await fetchGitHubStats(username, token);
+  const projects = await fetchGitHubRepos(username, token);
   // Display only the 4 most recent projects
   const recentProjects = projects.slice(0, 4)
 
